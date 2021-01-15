@@ -43,7 +43,7 @@ public class EmployeesIndexServlet extends HttpServlet {
                                      .setMaxResults(15)
                                      .getResultList();
 
-        Long employees_count = (long)em.createNamedQuery("getEmployeesCount", Long.class)
+        long employees_count = (long)em.createNamedQuery("getEmployeesCount", Long.class)
                                        .getSingleResult();
 
         em.close();
@@ -58,7 +58,5 @@ public class EmployeesIndexServlet extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/index.jsp");
         rd.forward(request, response);
-
     }
-
 }

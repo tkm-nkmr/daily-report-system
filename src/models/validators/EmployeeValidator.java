@@ -28,28 +28,29 @@ public class EmployeeValidator {
         }
 
         return errors;
-
     }
 
+    // 社員番号
     private static String validateCode(String code, Boolean codeDuplicateCheckFlag) {
+        // 必須入力チェック
         if(code == null || code.equals("")) {
-        return "社員番号を入力してください。";
-    }
-
-    // すでに登録されている社員番号との重複チェック
-    if(codeDuplicateCheckFlag) {
-        EntityManager em = DBUtil.createEntityManager();
-        long employees_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class)
-                                       .setParameter("code", code)
-                                         .getSingleResult();
-        em.close();
-        if(employees_count > 0) {
-            return "入力された社員番号の情報はすでに存在しています。";
+            return "社員番号を入力してください。";
         }
-    }
 
-    return "";
-}
+        // すでに登録されている社員番号との重複チェック
+        if(codeDuplicateCheckFlag) {
+            EntityManager em = DBUtil.createEntityManager();
+            long employees_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class)
+                                           .setParameter("code", code)
+                                             .getSingleResult();
+            em.close();
+            if(employees_count > 0) {
+                return "入力された社員番号の情報はすでに存在しています。";
+            }
+        }
+
+        return "";
+    }
 
     // 社員名の必須入力チェック
     private static String validateName(String name) {
@@ -60,12 +61,12 @@ public class EmployeeValidator {
         return "";
     }
 
-    // パスワード必須
+    // パスワードの必須入力チェック
     private static String validatePassword(String password, Boolean passwordCheckFlag) {
         // パスワードを変更する場合のみ実行
         if(passwordCheckFlag && (password == null || password.equals(""))) {
             return "パスワードを入力してください。";
         }
-        return null;
+        return "";
     }
 }

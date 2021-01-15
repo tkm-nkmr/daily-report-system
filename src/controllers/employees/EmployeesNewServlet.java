@@ -23,7 +23,6 @@ public class EmployeesNewServlet extends HttpServlet {
      */
     public EmployeesNewServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
