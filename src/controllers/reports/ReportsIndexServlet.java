@@ -18,13 +18,13 @@ import utils.DBUtil;
  * Servlet implementation class ReportIndexServlet
  */
 @WebServlet("/reports/index")
-public class ReportIndexServlet extends HttpServlet {
+public class ReportsIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportIndexServlet() {
+    public ReportsIndexServlet() {
         super();
     }
 

@@ -107,6 +107,7 @@ table#employee_list td {
 tr.row1 {
         background-color: #f2f2f2;
 }
+
 tr.row0 {
         background-color: #ffffff;
 }
@@ -161,4 +162,8 @@ table#report_list .report_action {
 
 pre {
     font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+}
+
+h3 {
+    font-size: larger;
 }
