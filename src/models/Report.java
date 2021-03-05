@@ -32,7 +32,15 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "getMyReportsCount",
         query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
-    )
+    ),
+    @NamedQuery(
+        name = "InnerFollows",
+        query = "SELECT r FROM Report AS r, Follow AS f WHERE r.employee = f.follow_employee AND f.employee = :employee ORDER BY r.id DESC"
+    ),
+    @NamedQuery(
+        name = "InnerFollowsCount",
+        query = "SELECT COUNT(r) FROM Report AS r, Follow AS f WHERE r.employee = f.follow_employee AND f.employee = :employee"
+    ),
 })
 @Entity
 public class Report {
@@ -60,6 +68,9 @@ public class Report {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
+
+    @Column(name = "nice_count", nullable = false)
+    private Integer nice_count;
 
     public Integer getId() {
         return id;
@@ -116,6 +127,15 @@ public class Report {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+    public Integer getNice_count() {
+        return nice_count;
+    }
+
+    public void setNice_count(Integer nice_count) {
+        this.nice_count = nice_count;
+    }
+
 
 
 }

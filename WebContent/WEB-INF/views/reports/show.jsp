@@ -35,12 +35,40 @@
                                 <fmt:formatDate value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" />
                             </td>
                         </tr>
+                        <tr>
+                             <th>いいね数</th>
+                                 <c:choose>
+                                   <c:when test="${report.nice_count == 0}">
+                                       <td>
+                                           <c:out value="${report.nice_count}" ></c:out>
+                                       </td>
+                                   </c:when>
+                                   <c:otherwise>
+                                       <td>
+                                           <a href="<c:url value='/niceEmployees/index?id=${report.id}' />"><c:out value="${report.nice_count}" ></c:out></a>
+                                       </td>
+                                   </c:otherwise>
+                                 </c:choose>
+                        </tr>
                     </tbody>
                 </table>
-
-                <c:if test="${sessionScope.login_employee.id == report.employee.id}">
-                    <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
-                </c:if>
+                <c:choose>
+                    <c:when test="${sessionScope.login_employee.id == report.employee.id}">
+                        <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
+                    </c:when>
+                    <c:when test="${niceDid_count == 0}">
+                        <p><a href="<c:url value="/reports/nice_count?id=${report.id}" />">この日報にいいねする</a></p>
+                    </c:when>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${sessionScope.login_employee.id != report.employee.id}">
+                        <c:choose>
+                            <c:when test="${followDid_count == 0}">
+                                <p><a href="<c:url value="/follows_count?id=${report.id}" />">この日報の社員をフォローする</a></p>
+                            </c:when>
+                        </c:choose>
+                   </c:when>
+               </c:choose>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
